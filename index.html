@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>underscore map</title>
+</head>
+<body>
+    <script src="./Underscore.js 1.9.0.js"></script>
+    <script type="text/javascript">
+    console.log(_.map()); // [1, 2, 3]
+
+    // 如果 map 的第二个参数不是函数，就返回该元素
+    console.log(_.map([1, 2, 3], 'name')); // [1, 2, 3]
+
+    // 如果 map 的第二个参数是函数，就使用该函数处理数组元素
+    var result = _.map([1, 2, 3], function(item) {
+        return item + 1;
+    });
+
+    console.log(result); // [2, 3, 4]
+    </script>
+</body>
+</html>
