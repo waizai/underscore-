@@ -17,6 +17,21 @@
 
     console.log(result); // [2, 3, 4]
 
+    // var results = _.map([1,2,3])
+
+    function extend(a, b){
+        for(var key in b) a[key] = b[key];
+        return a
+    }
+    var z = {a: 1, b: 5, c: 3};
+    var u = {u1: 1,u2: 4, u3: 8}
+
+    var rest = _.allKeys(z)
+    // var z = {a: 1, b: 5, c: 3};
+    // var u = {u1: 1,u2: 4, u3: 8}
+    var results = _.extend(z, u)
+    console.log(results)
+
 
     </script>
 </body>

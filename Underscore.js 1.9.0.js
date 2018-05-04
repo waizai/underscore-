@@ -112,11 +112,16 @@
   // element in a collection, returning the desired result — either `identity`,
   // an arbitrary callback, a property matcher, or a property accessor.
   var cb = function(value, context, argCount) {
+    //如果改变了iteratee的行为，则返回自定义的iteratee
+    //不过一般情况下不会走到这里
     if (_.iteratee !== builtinIteratee) return _.iteratee(value, context);
-    //正常情况下，上面这条语句并不会执行
+    //value == null，返回当前迭代元素自身。
     if (value == null) return _.identity;
+    //如果是函数，返回优化回调函数
     if (_.isFunction(value)) return optimizeCb(value, context, argCount);
+    //如果是obj,并且非数组，返回能判断对象是否相等的函数
     if (_.isObject(value) && !_.isArray(value)) return _.matcher(value);
+    //返回获取对象属性的函数
     return _.property(value);
   };
 
@@ -1098,15 +1103,24 @@
   };
 
   // An internal function for creating assigner functions.
+ /**
+ * @param keysFunc 指定获取属性的方式
+ * @param undefinedOnly 同名属性是否取第一次出现时的属性值
+ */
   var createAssigner = function(keysFunc, defaults) {
     return function(obj) {
+      //获取传入的对象的个数
       var length = arguments.length;
       if (defaults) obj = Object(obj);
+      //要扩展的对象没有被传入、传入一个，或者传入一个但是值为 null，将其返回
       if (length < 2 || obj == null) return obj;
+      //枚举第一个参数除外的对象参数
       for (var index = 1; index < length; index++) {
+        // 获取当前被遍历对象的属性
         var source = arguments[index],
             keys = keysFunc(source),
             l = keys.length;
+        // 对当前遍历对象的所有属性进行遍历
         for (var i = 0; i < l; i++) {
           var key = keys[i];
           if (!defaults || obj[key] === void 0) obj[key] = source[key];
