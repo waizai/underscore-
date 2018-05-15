@@ -426,6 +426,10 @@ proxy-addr@~2.0.3:
     forwarded "~0.1.2"
     ipaddr.js "1.6.0"
 
+q@^1.5.1:
+  version "1.5.1"
+  resolved "http://r.npm.sankuai.com/q/download/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
+
 qs@6.5.1:
   version "6.5.1"
   resolved "http://r.npm.sankuai.com/qs/download/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
